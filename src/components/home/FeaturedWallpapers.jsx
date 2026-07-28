@@ -11,7 +11,7 @@ const wallpapers = [
 
 export default function FeaturedWallpapers() {
   return (
-    <section id="explore" className="px-6 py-24 sm:px-8 sm:py-32">
+    <section id="explore" className="px-6 pt-12 pb-24 sm:px-8 sm:py-32">
       <div className="mx-auto max-w-7xl">
         <header className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
           <div>
