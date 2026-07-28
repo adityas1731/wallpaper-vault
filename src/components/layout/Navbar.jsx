@@ -1,3 +1,5 @@
+import { Link, NavLink } from 'react-router-dom'
+
 export default function Navbar() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-zinc-950/60 backdrop-blur">
@@ -6,22 +8,22 @@ export default function Navbar() {
         className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 sm:px-8"
       >
         {/* Logo */}
-        <a
-          href="/"
+        <Link
+          to="/"
           className="text-xl font-bold tracking-tight text-white transition-colors duration-200 hover:text-zinc-300"
         >
           Wallpaper Vault
-        </a>
+        </Link>
 
         <div className="flex items-center gap-6">
           {/* Desktop Navigation */}
           <div className="hidden items-center gap-6 md:flex">
-            <a
-              href="#explore"
-              className="text-sm font-medium text-white transition-colors duration-200"
+            <NavLink
+              to="/"
+              className={({ isActive }) => `text-sm font-medium transition-colors duration-200 hover:text-white ${isActive ? 'text-white' : 'text-zinc-300'}`}
             >
               Explore
-            </a>
+            </NavLink>
 
             <a
               href="#categories"
@@ -30,12 +32,12 @@ export default function Navbar() {
               Categories
             </a>
 
-            <a
-              href="#collections"
-              className="text-sm font-medium text-zinc-300 transition-colors duration-200 hover:text-white"
+            <NavLink
+              to="/wallpapers"
+              className={({ isActive }) => `text-sm font-medium transition-colors duration-200 hover:text-white ${isActive ? 'text-white' : 'text-zinc-300'}`}
             >
               Collections
-            </a>
+            </NavLink>
           </div>
 
           {/* Action Buttons */}

@@ -20,19 +20,19 @@ export default function TrendingWallpapers() {
             </h2>
             <p className="mt-3 text-zinc-400">Browse our most popular wallpapers.</p>
           </div>
-          <a
-            href="#all-wallpapers"
+          <Link
+            to="/wallpapers"
             className="w-fit text-sm font-semibold text-zinc-300 transition hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
           >
             View All →
-          </a>
+          </Link>
         </header>
 
         <ul className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {wallpapers.map((wallpaper) => (
             <li key={wallpaper.id}>
-              <a
-                href={`#trending-wallpaper-${wallpaper.id}`}
+              <Link
+                to={`/wallpapers/${wallpaper.id}`}
                 className="group relative block aspect-[2/3] overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] transition duration-300 ease-out hover:-translate-y-1 hover:border-white/30 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
               >
                 <img
@@ -51,7 +51,7 @@ export default function TrendingWallpapers() {
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-zinc-950 via-zinc-950/75 to-transparent px-5 pb-5 pt-16">
                   <h3 className="text-lg font-semibold text-white">{wallpaper.title}</h3>
                 </div>
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
@@ -59,3 +59,4 @@ export default function TrendingWallpapers() {
     </section>
   )
 }
+import { Link } from 'react-router-dom'

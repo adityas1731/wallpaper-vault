@@ -22,19 +22,19 @@ export default function FeaturedWallpapers() {
               Hand-picked wallpapers from our latest collection.
             </p>
           </div>
-          <a
-            href="#all-wallpapers"
+          <Link
+            to="/wallpapers"
             className="w-fit text-sm font-semibold text-zinc-300 transition hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
           >
             View All →
-          </a>
+          </Link>
         </header>
 
         <ul className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {wallpapers.map((wallpaper) => (
             <li key={wallpaper.id}>
-              <a
-                href={`#wallpaper-${wallpaper.id}`}
+              <Link
+                to={`/wallpapers/${wallpaper.id}`}
                 className="group block overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] transition duration-300 ease-out hover:-translate-y-1 hover:border-white/25 hover:bg-white/[0.06] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
               >
                 <div className="aspect-[2/3] overflow-hidden">
@@ -53,7 +53,7 @@ export default function FeaturedWallpapers() {
                     {wallpaper.resolution}
                   </span>
                 </div>
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
@@ -61,3 +61,4 @@ export default function FeaturedWallpapers() {
     </section>
   )
 }
+import { Link } from 'react-router-dom'

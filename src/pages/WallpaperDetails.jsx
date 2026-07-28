@@ -1,3 +1,4 @@
+import { Link, useParams } from 'react-router-dom'
 import WallpaperCard from '../components/wallpapers/WallpaperCard'
 
 const wallpaper = {
@@ -29,13 +30,16 @@ const details = [
 ]
 
 export default function WallpaperDetails() {
+  const { id } = useParams()
+  const previewImage = id === '1' ? wallpaper.image : `https://picsum.photos/900/1600?random=${Number(id) || 50}`
+
   return (
     <>
       <section className="px-6 pb-24 pt-32 sm:px-8 sm:pb-32 sm:pt-40">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[minmax(0,3fr)_minmax(20rem,2fr)] lg:items-center lg:gap-16">
           <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] p-2 sm:p-3">
             <img
-              src={wallpaper.image}
+              src={previewImage}
               alt={`${wallpaper.title} ${wallpaper.category.toLowerCase()} wallpaper preview`}
               className="aspect-[9/16] w-full rounded-xl object-cover"
             />
@@ -94,12 +98,12 @@ export default function WallpaperDetails() {
           <ul className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
             {relatedWallpapers.map((relatedWallpaper) => (
               <li key={relatedWallpaper.id}>
-                <a
-                  href={`#related-wallpaper-${relatedWallpaper.id}`}
+                <Link
+                  to={`/wallpapers/${relatedWallpaper.id}`}
                   className="block rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
                 >
                   <WallpaperCard wallpaper={relatedWallpaper} />
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

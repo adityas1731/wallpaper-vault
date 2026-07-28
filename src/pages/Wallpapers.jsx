@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import WallpaperCard from '../components/wallpapers/WallpaperCard'
 
 const wallpapers = [
@@ -55,12 +56,12 @@ export default function Wallpapers() {
         <ul className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {wallpapers.map((wallpaper) => (
             <li key={wallpaper.id}>
-              <a
-                href={`#wallpaper-${wallpaper.id}`}
+              <Link
+                to={`/wallpapers/${wallpaper.id}`}
                 className="block rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
               >
                 <WallpaperCard wallpaper={wallpaper} />
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
