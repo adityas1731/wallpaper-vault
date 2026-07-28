@@ -1,10 +1,10 @@
 import Layout from './components/layout/Layout'
-import Home from './pages/Home'
+import Wallpapers from './pages/Wallpapers'
 
 export default function App() {
   return (
     <Layout>
-      <Home />
+      <Wallpapers />
     </Layout>
     
   )
