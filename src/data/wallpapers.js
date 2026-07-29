@@ -7,11 +7,11 @@ const wallpaperRecords = [
   { id: 6, title: 'Aurora Echo', category: 'Minimal', resolution: '4K', dimensions: '2160 × 3840', fileSize: '5.1 MB', uploaded: '1 week ago', views: '49,670', downloads: '10,921', added: 'Yesterday', image: 'https://picsum.photos/900/1600?random=6' },
   { id: 7, title: 'Velvet Orbit', category: 'Cars', resolution: 'QHD', dimensions: '1440 × 3200', fileSize: '4.2 MB', uploaded: '8 days ago', views: '43,786', downloads: '8,930', added: '2 days ago', image: 'https://picsum.photos/900/1600?random=7' },
   { id: 8, title: 'Sakura Skies', category: 'Abstract', resolution: '4K', dimensions: '2160 × 3840', fileSize: '5.5 MB', uploaded: '9 days ago', views: '55,104', downloads: '12,006', added: '2 days ago', image: 'https://picsum.photos/900/1600?random=8' },
-  { id: 9, title: 'Velocity Red', category: 'Cars', resolution: '4K', dimensions: '2160 × 3840', fileSize: '5.3 MB', uploaded: '10 days ago', views: '48,992', downloads: '10,404', added: '3 days ago', image: 'https://picsum.photos/900/1600?random=9' },
-  { id: 10, title: 'Twilight Dunes', category: 'Nature', resolution: 'QHD', dimensions: '1440 × 2560', fileSize: '3.8 MB', uploaded: '11 days ago', views: '39,516', downloads: '8,202', added: '3 days ago', image: 'https://picsum.photos/900/1600?random=10' },
-  { id: 11, title: 'Void Runner', category: 'Gaming', resolution: '4K', dimensions: '2160 × 3840', fileSize: '5.7 MB', uploaded: '12 days ago', views: '57,208', downloads: '12,777', added: '4 days ago', image: 'https://picsum.photos/900/1600?random=11' },
-  { id: 12, title: 'Linear Calm', category: 'Minimal', resolution: 'QHD', dimensions: '1440 × 2560', fileSize: '3.2 MB', uploaded: '13 days ago', views: '34,806', downloads: '6,940', added: '4 days ago', image: 'https://picsum.photos/900/1600?random=12' },
-  { id: 13, title: 'Prismatic Wave', category: 'Abstract', resolution: '4K', dimensions: '2160 × 3840', fileSize: '5.0 MB', uploaded: '2 weeks ago', views: '45,117', downloads: '9,804', added: '5 days ago', image: 'https://picsum.photos/900/1600?random=13' },
+  { id: 9, title: 'Velocity Red', category: 'Cars', resolution: '4K', dimensions: '3840 × 2160', fileSize: '5.3 MB', uploaded: '10 days ago', views: '48,992', downloads: '10,404', added: '3 days ago', image: 'https://picsum.photos/1600/900?random=9', orientation: 'landscape' },
+  { id: 10, title: 'Twilight Dunes', category: 'Nature', resolution: 'QHD', dimensions: '2560 × 1440', fileSize: '3.8 MB', uploaded: '11 days ago', views: '39,516', downloads: '8,202', added: '3 days ago', image: 'https://picsum.photos/1600/900?random=10', orientation: 'landscape' },
+  { id: 11, title: 'Void Runner', category: 'Gaming', resolution: '4K', dimensions: '3840 × 2160', fileSize: '5.7 MB', uploaded: '12 days ago', views: '57,208', downloads: '12,777', added: '4 days ago', image: 'https://picsum.photos/1600/900?random=11', orientation: 'landscape' },
+  { id: 12, title: 'Linear Calm', category: 'Minimal', resolution: 'QHD', dimensions: '1600 × 1600', fileSize: '3.2 MB', uploaded: '13 days ago', views: '34,806', downloads: '6,940', added: '4 days ago', image: 'https://picsum.photos/1000/1000?random=12', orientation: 'square' },
+  { id: 13, title: 'Prismatic Wave', category: 'Abstract', resolution: '4K', dimensions: '2160 × 2160', fileSize: '5.0 MB', uploaded: '2 weeks ago', views: '45,117', downloads: '9,804', added: '5 days ago', image: 'https://picsum.photos/1000/1000?random=13', orientation: 'square' },
   { id: 14, title: 'Solar Silence', category: 'AMOLED', resolution: '4K', dimensions: '1440 × 3200', fileSize: '4.6 MB', uploaded: '2 weeks ago', views: '41,773', downloads: '8,698', added: '5 days ago', image: 'https://picsum.photos/900/1600?random=14' },
   { id: 15, title: 'Summit Light', category: 'Nature', resolution: 'QHD', dimensions: '1440 × 2560', fileSize: '3.7 MB', uploaded: '16 days ago', views: '38,224', downloads: '7,952', added: '6 days ago', image: 'https://picsum.photos/900/1600?random=15' },
   { id: 16, title: 'Digital Rain', category: 'Gaming', resolution: '4K', dimensions: '2160 × 3840', fileSize: '5.4 MB', uploaded: '17 days ago', views: '50,660', downloads: '11,036', added: '6 days ago', image: 'https://picsum.photos/900/1600?random=16' },
@@ -21,16 +21,25 @@ const wallpaperRecords = [
   { id: 20, title: 'Electric Reverie', category: 'AMOLED', resolution: 'QHD', dimensions: '1440 × 3200', fileSize: '4.4 MB', uploaded: '21 days ago', views: '47,361', downloads: '10,088', added: '8 days ago', image: 'https://picsum.photos/900/1600?random=20' },
 ]
 
-export const wallpapers = wallpaperRecords.map((wallpaper, index) => ({
-  ...wallpaper,
-  slug: wallpaper.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
-  thumbnail: wallpaper.image.replace('/900/1600', '/600/900'),
-  tags: [wallpaper.category.toLowerCase(), 'curated', 'wallpaper'],
-  aspectRatio: '9:16',
-  orientation: 'portrait',
-  colors: index % 2 === 0 ? ['#18181b', '#a1a1aa', '#ffffff'] : ['#09090b', '#52525b', '#d4d4d8'],
-  format: 'JPG',
-  uploadedAt: wallpaper.uploaded,
-  featured: index < 8,
-  trending: index < 8,
-}))
+export const wallpapers = wallpaperRecords.map((wallpaper, index) => {
+  const orientation = wallpaper.orientation ?? 'portrait'
+  const dimensions = orientation === 'landscape'
+    ? { width: 3840, height: 2160, aspectRatio: '16:9' }
+    : orientation === 'square'
+      ? { width: 2160, height: 2160, aspectRatio: '1:1' }
+      : { width: 1440, height: 3200, aspectRatio: '9:16' }
+
+  return {
+    ...wallpaper,
+    ...dimensions,
+    slug: wallpaper.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
+    thumbnail: wallpaper.image.replace('/900/1600', '/600/900'),
+    tags: [wallpaper.category.toLowerCase(), 'curated', 'wallpaper'],
+    orientation,
+    colors: index % 2 === 0 ? ['#18181b', '#a1a1aa', '#ffffff'] : ['#09090b', '#52525b', '#d4d4d8'],
+    format: 'JPG',
+    uploadedAt: wallpaper.uploaded,
+    featured: index < 8,
+    trending: index < 8,
+  }
+})
