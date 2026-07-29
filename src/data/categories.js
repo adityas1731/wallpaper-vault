@@ -1,10 +1,3 @@
-export const categories = [
-  'Desktop',
-  'AMOLED',
-  'Anime',
-  'Gaming',
-  'Nature',
-  'Minimal',
-  'Cars',
-  'Abstract',
-]
+import { wallpapers } from './wallpapers'
+
+export const categories = [...new Set(wallpapers.map((wallpaper) => wallpaper.category))]

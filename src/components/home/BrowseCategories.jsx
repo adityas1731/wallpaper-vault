@@ -11,7 +11,7 @@ export default function BrowseCategories() {
         </header>
         <ul className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
           {categories.map((category, index) => {
-            const count = category === 'Desktop' ? wallpapers.length : wallpapers.filter((wallpaper) => wallpaper.category === category).length
+            const count = wallpapers.filter((wallpaper) => wallpaper.category === category).length
 
             return (
               <li key={category}>
