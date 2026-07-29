@@ -1,1 +1,43 @@
 @import "tailwindcss";
+
+/* ---------------------------------------- */
+/* Search Modal Scrollbar                   */
+/* ---------------------------------------- */
+
+.search-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+}
+
+.search-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.search-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.search-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+  transition: background-color 0.2s ease;
+}
+
+.search-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+  background-clip: content-box;
+}
+
+.search-scrollbar::-webkit-scrollbar-corner {
+  background: transparent;
+.search-scrollbar::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+.search-scrollbar:hover::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,.22);
+  background-clip: content-box;
+}
+}

@@ -1,6 +1,10 @@
+import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import SearchModal from '../common/SearchModal'
 
-export default function Navbar() {
+export default function Navbar({ onSearch }) {
+  const handleCloseSearch = () => setIsSearchOpen(false)
+
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-zinc-950/60 backdrop-blur">
       <nav
@@ -45,6 +49,9 @@ export default function Navbar() {
             <button
               type="button"
               aria-label="Search wallpapers"
+              aria-haspopup="dialog"
+              aria-expanded={false}
+              onClick={onSearch}
               className="rounded-full p-2 text-zinc-300 transition-colors duration-200 hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-white/20"
             >
               <svg
@@ -70,6 +77,7 @@ export default function Navbar() {
           </div>
         </div>
       </nav>
+
     </header>
   );
 }
