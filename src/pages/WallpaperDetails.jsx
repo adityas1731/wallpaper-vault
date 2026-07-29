@@ -15,23 +15,13 @@ export default function WallpaperDetails() {
   const sameCategory = wallpapers.filter((item) => item.id !== wallpaper.id && item.category === wallpaper.category)
   const additionalWallpapers = wallpapers.filter((item) => item.id !== wallpaper.id && item.category !== wallpaper.category)
   const relatedWallpapers = [...sameCategory, ...additionalWallpapers].slice(0, 4)
-  const isDesktopWallpaper = wallpaper.orientation === 'landscape'
-  const isSquareWallpaper = wallpaper.orientation === 'square'
-  const previewContainerClass = isDesktopWallpaper
-    ? 'w-full max-w-2xl'
-    : isSquareWallpaper
-      ? 'w-fit max-w-[85%]'
-      : 'w-fit max-w-full'
-  const previewImageClass = isDesktopWallpaper
-    ? 'h-auto max-h-[70vh] w-full rounded-xl object-contain'
-    : 'block h-auto max-h-[70vh] max-w-full w-auto rounded-xl object-contain'
   return (
     <>
       <section className="px-6 pb-24 pt-32 sm:px-8 sm:pb-32 sm:pt-40">
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[minmax(0,3fr)_minmax(20rem,2fr)] lg:items-start lg:gap-12 xl:gap-16">
           <div className="flex w-full justify-center">
-            <div className={`overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] p-2 sm:p-3 ${previewContainerClass}`}>
-              <img src={wallpaper.image} alt={`${wallpaper.title} ${wallpaper.category.toLowerCase()} wallpaper preview`} className={previewImageClass} />
+            <div className="w-fit max-w-full overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] p-2 sm:p-3">
+              <img src={wallpaper.image} alt={`${wallpaper.title} ${wallpaper.category.toLowerCase()} wallpaper preview`} className="block h-auto max-h-[70vh] max-w-full w-auto rounded-xl object-contain" />
             </div>
           </div>
           <article>
