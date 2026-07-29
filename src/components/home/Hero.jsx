@@ -1,6 +1,6 @@
-export default function Hero() {
-  const categories = ['Desktop', 'AMOLED', 'Anime', 'Gaming', 'Nature', 'Minimal']
+import { categories } from '../../data/categories'
 
+export default function Hero() {
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 py-32 text-center sm:px-8">
       <div
@@ -20,7 +20,7 @@ export default function Hero() {
         </p>
 
         <ul className="mt-9 flex flex-wrap justify-center gap-3" aria-label="Wallpaper categories">
-          {categories.map((category) => (
+          {categories.slice(0, 6).map((category) => (
             <li key={category}>
               <a
                 href={`#${category.toLowerCase()}`}

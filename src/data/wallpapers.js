@@ -1,4 +1,4 @@
-export const wallpapers = [
+const wallpaperRecords = [
   { id: 1, title: 'Neon Horizon', category: 'AMOLED', resolution: '4K', dimensions: '1440 × 3200', fileSize: '4.8 MB', uploaded: '3 days ago', views: '58,391', downloads: '12,482', added: '2 hours ago', image: 'https://picsum.photos/900/1600?random=1' },
   { id: 2, title: 'Celestial Bloom', category: 'Anime', resolution: 'QHD', dimensions: '1440 × 2560', fileSize: '3.9 MB', uploaded: '4 days ago', views: '46,218', downloads: '9,745', added: '4 hours ago', image: 'https://picsum.photos/900/1600?random=2' },
   { id: 3, title: 'Verdant Peaks', category: 'Nature', resolution: '4K', dimensions: '2160 × 3840', fileSize: '5.2 MB', uploaded: '5 days ago', views: '52,904', downloads: '11,187', added: '6 hours ago', image: 'https://picsum.photos/900/1600?random=3' },
@@ -20,3 +20,17 @@ export const wallpapers = [
   { id: 19, title: 'Ocean Afterglow', category: 'Nature', resolution: '4K', dimensions: '2160 × 3840', fileSize: '5.3 MB', uploaded: '20 days ago', views: '44,923', downloads: '9,620', added: '8 days ago', image: 'https://picsum.photos/900/1600?random=19' },
   { id: 20, title: 'Electric Reverie', category: 'AMOLED', resolution: 'QHD', dimensions: '1440 × 3200', fileSize: '4.4 MB', uploaded: '21 days ago', views: '47,361', downloads: '10,088', added: '8 days ago', image: 'https://picsum.photos/900/1600?random=20' },
 ]
+
+export const wallpapers = wallpaperRecords.map((wallpaper, index) => ({
+  ...wallpaper,
+  slug: wallpaper.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
+  thumbnail: wallpaper.image.replace('/900/1600', '/600/900'),
+  tags: [wallpaper.category.toLowerCase(), 'curated', 'wallpaper'],
+  aspectRatio: '9:16',
+  orientation: 'portrait',
+  colors: index % 2 === 0 ? ['#18181b', '#a1a1aa', '#ffffff'] : ['#09090b', '#52525b', '#d4d4d8'],
+  format: 'JPG',
+  uploadedAt: wallpaper.uploaded,
+  featured: index < 8,
+  trending: index < 8,
+}))

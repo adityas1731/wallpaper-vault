@@ -10,9 +10,11 @@ export default function WallpaperDetails() {
 
   const details = [
     ['Device support', 'Mobile / AMOLED'], ['Dimensions', wallpaper.dimensions], ['File size', wallpaper.fileSize],
-    ['Uploaded', wallpaper.uploaded], ['Views', wallpaper.views], ['Downloads', wallpaper.downloads],
+    ['Uploaded', wallpaper.uploadedAt], ['Views', wallpaper.views], ['Downloads', wallpaper.downloads],
   ]
-  const relatedWallpapers = wallpapers.filter((item) => item.id !== wallpaper.id).slice(0, 4)
+  const sameCategory = wallpapers.filter((item) => item.id !== wallpaper.id && item.category === wallpaper.category)
+  const additionalWallpapers = wallpapers.filter((item) => item.id !== wallpaper.id && item.category !== wallpaper.category)
+  const relatedWallpapers = [...sameCategory, ...additionalWallpapers].slice(0, 4)
 
   return (
     <>

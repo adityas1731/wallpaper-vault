@@ -1,11 +1,11 @@
+import { categories } from '../../data/categories'
+
 const quickLinks = [
   { label: 'Home', href: '/' },
   { label: 'Trending', href: '#trending' },
   { label: 'Categories', href: '#categories' },
   { label: 'Recently Added', href: '#recently-added' },
 ]
-
-const categories = ['AMOLED', 'Anime', 'Gaming', 'Nature']
 
 const socials = ['GitHub', 'X', 'Discord']
 
@@ -39,7 +39,7 @@ export default function Footer() {
           <nav aria-label="Wallpaper categories">
             <h2 className="text-sm font-semibold text-white">Categories</h2>
             <ul className="mt-4 space-y-3">
-              {categories.map((category) => (
+              {categories.slice(1, 5).map((category) => (
                 <li key={category}>
                   <a href={`#category-${category.toLowerCase()}`} className="text-sm text-zinc-400 transition hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
                     {category}
