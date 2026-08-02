@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom'
 import { categories } from '../../data/categories'
+import { createCategorySlug } from '../../utils/categorySlug'
 
 export default function Hero() {
   return (
@@ -22,29 +24,29 @@ export default function Hero() {
         <ul className="mt-9 flex flex-wrap justify-center gap-3" aria-label="Wallpaper categories">
           {categories.slice(0, 6).map((category) => (
             <li key={category}>
-              <a
-                href={`#${category.toLowerCase()}`}
+              <Link
+                to={`/categories/${createCategorySlug(category)}`}
                 className="rounded-full border border-white/[0.08] bg-white/5 px-5 py-2 text-sm font-medium text-zinc-300 shadow-sm shadow-black/10 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-white/15 hover:bg-white/10 hover:text-white hover:shadow-md hover:shadow-black/20"
               >
                 {category}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
 
         <div className="mt-11 flex flex-col justify-center gap-4 sm:flex-row">
-          <button
-            type="button"
+          <Link
+            to="/wallpapers"
             className="rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-zinc-950 shadow-lg shadow-white/5 transition duration-300 ease-out hover:-translate-y-0.5 hover:bg-zinc-200 hover:shadow-xl hover:shadow-white/10"
           >
             Browse Wallpapers
-          </button>
-          <button
-            type="button"
+          </Link>
+          <a
+            href="#categories"
             className="rounded-full border border-zinc-700 bg-zinc-900/50 px-7 py-3.5 text-sm font-semibold text-white transition duration-300 ease-out hover:-translate-y-0.5 hover:border-zinc-500 hover:bg-zinc-800 hover:shadow-lg hover:shadow-black/20"
           >
             View Categories
-          </button>
+          </a>
         </div>
 
         <dl className="mx-auto mt-20 grid max-w-3xl grid-cols-1 gap-4 sm:grid-cols-3">

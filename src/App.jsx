@@ -1,5 +1,6 @@
 import { Link, Route, Routes } from 'react-router-dom'
 import Layout from './components/layout/Layout'
+import CategoryWallpapers from './pages/CategoryWallpapers'
 import Favorites from './pages/Favorites'
 import Home from './pages/Home'
 import WallpaperDetails from './pages/WallpaperDetails'
@@ -30,6 +31,7 @@ export default function App() {
         <Route path="/wallpapers" element={<Wallpapers />} />
         <Route path="/wallpapers/:id" element={<WallpaperDetails />} />
         <Route path="/favorites" element={<Favorites />} />
+        <Route path="/categories/:categorySlug" element={<CategoryWallpapers />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Layout>

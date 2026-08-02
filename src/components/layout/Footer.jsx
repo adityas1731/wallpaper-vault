@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom'
 import { categories } from '../../data/categories'
+import { createCategorySlug } from '../../utils/categorySlug'
 
 const quickLinks = [
   { label: 'Home', href: '/' },
@@ -41,9 +43,9 @@ export default function Footer() {
             <ul className="mt-4 space-y-3">
               {categories.slice(1, 5).map((category) => (
                 <li key={category}>
-                  <a href={`#category-${category.toLowerCase()}`} className="text-sm text-zinc-400 transition hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+                  <Link to={`/categories/${createCategorySlug(category)}`} className="text-sm text-zinc-400 transition hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
                     {category}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
