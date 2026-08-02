@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { wallpapers } from '../../data/wallpapers'
+import { useWallpapers } from '../../context/WallpapersContext'
 import { searchWallpapers } from '../../utils/searchWallpapers'
 
 export default function SearchModal({ isOpen, onClose }) {
+  const { wallpapers } = useWallpapers()
   const [search, setSearch] = useState({ query: '', pathname: '' })
   const [selectedIndex, setSelectedIndex] = useState(-1)
   const inputRef = useRef(null)
@@ -36,7 +37,7 @@ export default function SearchModal({ isOpen, onClose }) {
 
   const results = useMemo(
     () => searchWallpapers(wallpapers, query),
-    [query],
+    [query, wallpapers],
   )
 
   useEffect(() => {

@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom'
 import WallpaperCard from '../components/wallpapers/WallpaperCard'
 import Seo from '../components/common/Seo'
-import { wallpapers } from '../data/wallpapers'
+import { useWallpapers } from '../context/WallpapersContext'
 import { useFavorites } from '../hooks/useFavorites'
 
 export default function Favorites() {
   const { favoriteIds } = useFavorites()
+  const { wallpapers } = useWallpapers()
   const favoriteWallpapers = wallpapers.filter((wallpaper) => favoriteIds.includes(wallpaper.id))
 
   return (

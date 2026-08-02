@@ -3,13 +3,15 @@ import { Link, Navigate, useParams } from 'react-router-dom'
 import WallpaperCard from '../components/wallpapers/WallpaperCard'
 import OptimizedImage from '../components/common/OptimizedImage'
 import Seo from '../components/common/Seo'
-import { wallpapers } from '../data/wallpapers'
+import PageLoader from '../components/common/PageLoader'
+import { useWallpapers } from '../context/WallpapersContext'
 import { useFavorites } from '../hooks/useFavorites'
 import { downloadWallpaper } from '../utils/downloadWallpaper'
 import { shareWallpaper } from '../utils/shareWallpaper'
 
 export default function WallpaperDetails() {
   const { id } = useParams()
+  const { wallpapers, isLoading } = useWallpapers()
   const { isFavorite, toggleFavorite } = useFavorites()
   const [isDownloading, setIsDownloading] = useState(false)
   const [downloadError, setDownloadError] = useState('')
@@ -20,6 +22,7 @@ export default function WallpaperDetails() {
 
   useEffect(() => () => window.clearTimeout(shareTimerRef.current), [])
 
+  if (isLoading) return <PageLoader />
   if (!wallpaper) return <Navigate to="/404" replace />
 
   const details = [

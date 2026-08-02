@@ -1,3 +1,5 @@
-import { wallpapers } from './wallpapers'
+export function getCategories(wallpapers) {
+  if (!Array.isArray(wallpapers)) return []
 
-export const categories = [...new Set(wallpapers.map((wallpaper) => wallpaper.category))]
+  return [...new Set(wallpapers.map((wallpaper) => wallpaper?.category).filter(Boolean))]
+}

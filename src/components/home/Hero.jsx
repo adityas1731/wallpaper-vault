@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
-import { categories } from '../../data/categories'
+import { useWallpapers } from '../../context/WallpapersContext'
 import { createCategorySlug } from '../../utils/categorySlug'
 
 export default function Hero() {
+  const { wallpapers } = useWallpapers()
+  const categories = [...new Set(wallpapers.map((wallpaper) => wallpaper.category))]
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 py-32 text-center sm:px-8">
       <div
@@ -41,12 +43,12 @@ export default function Hero() {
           >
             Browse Wallpapers
           </Link>
-          <a
-            href="#categories"
+          <Link
+            to="/categories"
             className="rounded-full border border-zinc-700 bg-zinc-900/50 px-7 py-3.5 text-sm font-semibold text-white transition duration-300 ease-out hover:-translate-y-0.5 hover:border-zinc-500 hover:bg-zinc-800 hover:shadow-lg hover:shadow-black/20"
           >
             View Categories
-          </a>
+          </Link>
         </div>
 
         <dl className="mx-auto mt-20 grid max-w-3xl grid-cols-1 gap-4 sm:grid-cols-3">

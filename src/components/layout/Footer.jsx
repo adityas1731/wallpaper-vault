@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { categories } from '../../data/categories'
+import { useWallpapers } from '../../context/WallpapersContext'
 import { createCategorySlug } from '../../utils/categorySlug'
 
 const quickLinks = [
@@ -12,6 +12,8 @@ const quickLinks = [
 const socials = ['GitHub', 'X', 'Discord']
 
 export default function Footer() {
+  const { wallpapers } = useWallpapers()
+  const categories = [...new Set(wallpapers.map((wallpaper) => wallpaper.category))]
   return (
     <footer className="border-t border-white/10 bg-zinc-950/60 px-6 pt-16 sm:px-8 sm:pt-20">
       <div className="mx-auto max-w-7xl">

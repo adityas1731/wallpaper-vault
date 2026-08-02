@@ -1,13 +1,17 @@
 import { Link, useParams } from 'react-router-dom'
 import WallpaperCard from '../components/wallpapers/WallpaperCard'
 import Seo from '../components/common/Seo'
-import { wallpapers } from '../data/wallpapers'
+import PageLoader from '../components/common/PageLoader'
+import { useWallpapers } from '../context/WallpapersContext'
 import { categoryMatchesSlug } from '../utils/categorySlug'
 
 export default function CategoryWallpapers() {
   const { categorySlug } = useParams()
+  const { wallpapers, isLoading } = useWallpapers()
   const categoryWallpapers = wallpapers.filter((wallpaper) => categoryMatchesSlug(wallpaper.category, categorySlug))
   const categoryName = categoryWallpapers[0]?.category
+
+  if (isLoading) return <PageLoader />
 
   if (!categoryName) {
     return (

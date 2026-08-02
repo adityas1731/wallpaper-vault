@@ -10,7 +10,7 @@ export default function Navbar({ onSearch }) {
         {/* Logo */}
         <Link
           to="/"
-          className="text-xl font-bold tracking-tight text-white transition-colors duration-200 hover:text-zinc-300"
+          className="text-xl font-bold tracking-tight text-white transition-colors duration-200 hover:text-zinc-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
         >
           Wallpaper Vault
         </Link>
@@ -19,18 +19,11 @@ export default function Navbar({ onSearch }) {
           {/* Desktop Navigation */}
           <div className="hidden items-center gap-6 md:flex">
             <NavLink
-              to="/"
+              to="/categories"
               className={({ isActive }) => `text-sm font-medium transition-colors duration-200 hover:text-white ${isActive ? 'text-white' : 'text-zinc-300'}`}
             >
-              Explore
-            </NavLink>
-
-            <Link
-              to="/#categories"
-              className="text-sm font-medium text-zinc-300 transition-colors duration-200 hover:text-white"
-            >
               Categories
-            </Link>
+            </NavLink>
 
             <NavLink
               to="/wallpapers"

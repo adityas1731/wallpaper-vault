@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom'
 import OptimizedImage from '../common/OptimizedImage'
-import { wallpapers } from '../../data/wallpapers'
+import { useWallpapers } from '../../context/WallpapersContext'
 
 export default function TrendingWallpapers() {
+  const { wallpapers } = useWallpapers()
   return (
     <section id="trending" className="px-6 py-24 sm:px-8 sm:py-32"><div className="mx-auto max-w-7xl">
       <header className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between"><div><h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">Trending Wallpapers</h2><p className="mt-3 text-zinc-400">Browse our most popular wallpapers.</p></div><Link to="/wallpapers" className="w-fit text-sm font-semibold text-zinc-300 transition hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">View All →</Link></header>

@@ -3,24 +3,25 @@ import { Link, useSearchParams } from 'react-router-dom'
 import WallpaperFilters from '../components/wallpapers/WallpaperFilters'
 import WallpaperCard from '../components/wallpapers/WallpaperCard'
 import Seo from '../components/common/Seo'
-import { wallpapers } from '../data/wallpapers'
+import { useWallpapers } from '../context/WallpapersContext'
 import { createCategorySlug } from '../utils/categorySlug'
 import { filterWallpapers } from '../utils/filterWallpapers'
 
 const sortOptions = ['relevance', 'title-asc', 'title-desc']
 
 export default function Wallpapers() {
+  const { wallpapers } = useWallpapers()
   const [searchParams, setSearchParams] = useSearchParams()
   const categories = useMemo(() => [...new Set(wallpapers.map((wallpaper) => wallpaper.category).filter((category) => typeof category === 'string' && category.trim()))]
     .sort((first, second) => first.localeCompare(second))
-    .map((category) => ({ label: category, value: createCategorySlug(category) })), [])
+    .map((category) => ({ label: category, value: createCategorySlug(category) })), [wallpapers])
   const requestedCategory = searchParams.get('category') ?? ''
   const query = searchParams.get('q') ?? ''
   const category = categories.some((item) => item.value === requestedCategory) ? requestedCategory : ''
   const requestedSort = searchParams.get('sort')
   const sort = sortOptions.includes(requestedSort) ? requestedSort : 'relevance'
   const filters = useMemo(() => ({ query, category, sort }), [category, query, sort])
-  const displayedWallpapers = useMemo(() => filterWallpapers(wallpapers, filters), [filters])
+  const displayedWallpapers = useMemo(() => filterWallpapers(wallpapers, filters), [filters, wallpapers])
 
   const updateFilters = (nextFilters) => {
     const nextParams = new URLSearchParams()
