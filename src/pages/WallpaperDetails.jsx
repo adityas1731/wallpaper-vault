@@ -1,16 +1,22 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import WallpaperCard from '../components/wallpapers/WallpaperCard'
 import { wallpapers } from '../data/wallpapers'
 import { useFavorites } from '../hooks/useFavorites'
 import { downloadWallpaper } from '../utils/downloadWallpaper'
+import { shareWallpaper } from '../utils/shareWallpaper'
 
 export default function WallpaperDetails() {
   const { id } = useParams()
   const { isFavorite, toggleFavorite } = useFavorites()
   const [isDownloading, setIsDownloading] = useState(false)
   const [downloadError, setDownloadError] = useState('')
+  const [isSharing, setIsSharing] = useState(false)
+  const [shareFeedback, setShareFeedback] = useState({ message: '', wallpaperId: null })
+  const shareTimerRef = useRef(null)
   const wallpaper = wallpapers.find((item) => item.id === Number(id))
+
+  useEffect(() => () => window.clearTimeout(shareTimerRef.current), [])
 
   if (!wallpaper) return <Navigate to="/404" replace />
 
@@ -21,6 +27,14 @@ export default function WallpaperDetails() {
   const sameCategory = wallpapers.filter((item) => item.id !== wallpaper.id && item.category === wallpaper.category)
   const additionalWallpapers = wallpapers.filter((item) => item.id !== wallpaper.id && item.category !== wallpaper.category)
   const relatedWallpapers = [...sameCategory, ...additionalWallpapers].slice(0, 4)
+  const shareMessage = shareFeedback.wallpaperId === wallpaper.id ? shareFeedback.message : ''
+  const showShareMessage = (message) => {
+    window.clearTimeout(shareTimerRef.current)
+    setShareFeedback({ message, wallpaperId: wallpaper.id })
+    shareTimerRef.current = window.setTimeout(() => {
+      setShareFeedback({ message: '', wallpaperId: wallpaper.id })
+    }, 2500)
+  }
   const handleDownload = async () => {
     setIsDownloading(true)
     setDownloadError('')
@@ -33,6 +47,25 @@ export default function WallpaperDetails() {
       setIsDownloading(false)
     }
   }
+  const handleShare = async () => {
+    if (isSharing) return
+
+    setIsSharing(true)
+    setShareFeedback({ message: '', wallpaperId: wallpaper.id })
+    window.clearTimeout(shareTimerRef.current)
+
+    try {
+      const result = await shareWallpaper({ title: wallpaper.title, url: window.location.href })
+
+      if (result === 'shared') showShareMessage('Shared successfully.')
+      if (result === 'copied') showShareMessage('Link copied to clipboard.')
+    } catch {
+      showShareMessage('Unable to share this wallpaper. Please try again.')
+    } finally {
+      setIsSharing(false)
+    }
+  }
+
   return (
     <>
       <section className="px-6 pb-24 pt-32 sm:px-8 sm:pb-32 sm:pt-40">
@@ -50,9 +83,10 @@ export default function WallpaperDetails() {
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <button type="button" onClick={handleDownload} disabled={isDownloading} aria-busy={isDownloading} className="rounded-xl bg-white px-6 py-3 text-sm font-semibold text-zinc-950 shadow-lg shadow-white/5 transition hover:-translate-y-0.5 hover:bg-zinc-200 hover:shadow-xl hover:shadow-white/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0 disabled:hover:bg-white">{isDownloading ? 'Downloading...' : 'Download Wallpaper'}</button>
               <button type="button" aria-pressed={isFavorite(wallpaper.id)} onClick={() => toggleFavorite(wallpaper.id)} className="rounded-xl border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">{isFavorite(wallpaper.id) ? 'Remove from Favorites' : 'Add to Favorites'}</button>
-              <button type="button" className="rounded-xl border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">Share</button>
+              <button type="button" onClick={handleShare} disabled={isSharing} aria-busy={isSharing} className="rounded-xl border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0 disabled:hover:bg-white">{isSharing ? 'Sharing...' : 'Share Wallpaper'}</button>
             </div>
             <p aria-live="polite" className="mt-3 text-sm text-red-400">{downloadError}</p>
+            <p aria-live="polite" className={`text-sm ${shareMessage.startsWith('Unable') ? 'text-red-400' : 'text-zinc-400'}`}>{shareMessage}</p>
           </article>
         </div>
       </section>
