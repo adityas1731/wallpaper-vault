@@ -1,11 +1,15 @@
+import { useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import WallpaperCard from '../components/wallpapers/WallpaperCard'
 import { wallpapers } from '../data/wallpapers'
 import { useFavorites } from '../hooks/useFavorites'
+import { downloadWallpaper } from '../utils/downloadWallpaper'
 
 export default function WallpaperDetails() {
   const { id } = useParams()
   const { isFavorite, toggleFavorite } = useFavorites()
+  const [isDownloading, setIsDownloading] = useState(false)
+  const [downloadError, setDownloadError] = useState('')
   const wallpaper = wallpapers.find((item) => item.id === Number(id))
 
   if (!wallpaper) return <Navigate to="/404" replace />
@@ -17,6 +21,18 @@ export default function WallpaperDetails() {
   const sameCategory = wallpapers.filter((item) => item.id !== wallpaper.id && item.category === wallpaper.category)
   const additionalWallpapers = wallpapers.filter((item) => item.id !== wallpaper.id && item.category !== wallpaper.category)
   const relatedWallpapers = [...sameCategory, ...additionalWallpapers].slice(0, 4)
+  const handleDownload = async () => {
+    setIsDownloading(true)
+    setDownloadError('')
+
+    try {
+      await downloadWallpaper({ imageUrl: wallpaper.image, title: wallpaper.title, id: wallpaper.id })
+    } catch {
+      setDownloadError('Download failed. Please try again.')
+    } finally {
+      setIsDownloading(false)
+    }
+  }
   return (
     <>
       <section className="px-6 pb-24 pt-32 sm:px-8 sm:pb-32 sm:pt-40">
@@ -32,10 +48,11 @@ export default function WallpaperDetails() {
             <p className="mt-4 max-w-xl text-lg leading-8 text-zinc-400">A curated wallpaper designed for vivid contrast and immersive displays.</p>
             <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-6 border-y border-white/10 py-7 sm:grid-cols-3">{details.map(([label, value]) => <div key={label}><dt className="text-sm text-zinc-500">{label}</dt><dd className="mt-1 font-medium text-zinc-200">{value}</dd></div>)}</dl>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <button type="button" className="rounded-xl bg-white px-6 py-3 text-sm font-semibold text-zinc-950 shadow-lg shadow-white/5 transition hover:-translate-y-0.5 hover:bg-zinc-200 hover:shadow-xl hover:shadow-white/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">Download Wallpaper</button>
+              <button type="button" onClick={handleDownload} disabled={isDownloading} aria-busy={isDownloading} className="rounded-xl bg-white px-6 py-3 text-sm font-semibold text-zinc-950 shadow-lg shadow-white/5 transition hover:-translate-y-0.5 hover:bg-zinc-200 hover:shadow-xl hover:shadow-white/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0 disabled:hover:bg-white">{isDownloading ? 'Downloading...' : 'Download Wallpaper'}</button>
               <button type="button" aria-pressed={isFavorite(wallpaper.id)} onClick={() => toggleFavorite(wallpaper.id)} className="rounded-xl border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">{isFavorite(wallpaper.id) ? 'Remove from Favorites' : 'Add to Favorites'}</button>
               <button type="button" className="rounded-xl border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">Share</button>
             </div>
+            <p aria-live="polite" className="mt-3 text-sm text-red-400">{downloadError}</p>
           </article>
         </div>
       </section>
