@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import HomeLogoLink from '../common/HomeLogoLink'
 import { useWallpapers } from '../../context/WallpapersContext'
 import { createCategorySlug } from '../../utils/categorySlug'
 
@@ -17,9 +18,9 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
           <div>
-            <Link to="/" className="text-lg font-semibold tracking-tight text-[var(--text-primary)] transition hover:text-[var(--accent)]">
+            <HomeLogoLink className="text-lg font-semibold tracking-tight text-[var(--text-primary)] transition hover:text-[var(--accent)]">
               Wallpaper Vault
-            </Link>
+            </HomeLogoLink>
             <p className="mt-4 max-w-xs text-sm leading-6 text-[var(--text-secondary)]">
               Discover high-quality wallpapers for every device.
             </p>
