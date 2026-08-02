@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import WallpaperCard from '../components/wallpapers/WallpaperCard'
+import OptimizedImage from '../components/common/OptimizedImage'
 import Seo from '../components/common/Seo'
 import { wallpapers } from '../data/wallpapers'
 import { useFavorites } from '../hooks/useFavorites'
@@ -74,7 +75,7 @@ export default function WallpaperDetails() {
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[minmax(0,3fr)_minmax(20rem,2fr)] lg:items-start lg:gap-12 xl:gap-16">
           <div className="flex w-full justify-center">
             <div className="w-fit max-w-full overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] p-2 sm:p-3">
-              <img src={wallpaper.image} alt={`${wallpaper.title} ${wallpaper.category.toLowerCase()} wallpaper preview`} className="block h-auto max-h-[70vh] max-w-full w-auto rounded-xl object-contain" />
+              <OptimizedImage src={wallpaper.image} alt={`${wallpaper.title} ${wallpaper.category.toLowerCase()} wallpaper preview`} priority className="block h-auto max-h-[70vh] max-w-full w-auto rounded-xl object-contain" />
             </div>
           </div>
           <article>

@@ -1,7 +1,9 @@
+import OptimizedImage from '../common/OptimizedImage'
+
 export default function WallpaperCard({ wallpaper }) {
   return (
     <article className="group relative aspect-[2/3] overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] transition duration-300 ease-out hover:-translate-y-1 hover:border-white/30">
-      <img
+      <OptimizedImage
         src={wallpaper.image}
         alt={`${wallpaper.title} ${wallpaper.category.toLowerCase()} wallpaper`}
         className="size-full object-cover transition duration-500 ease-out group-hover:scale-105"
