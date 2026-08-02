@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="%BASE_URL%favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Discover curated desktop, mobile, AMOLED, anime, gaming and 4K wallpapers." />
     <meta name="theme-color" content="#09090b" />
@@ -17,6 +17,23 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      (function () {
+        var routeKey = '__wallpaper_vault_route';
+        var queryKey = '__wallpaper_vault_query';
+        var hashKey = '__wallpaper_vault_hash';
+        var basePath = '/wallpaper-vault/';
+        var params = new URLSearchParams(window.location.search);
+        var route = params.get(routeKey);
+
+        if (route !== null && window.location.pathname === basePath) {
+          var query = params.get(queryKey);
+          var hash = params.get(hashKey);
+          var restoredPath = basePath.replace(/\/$/, '') + route;
+          window.history.replaceState(null, '', restoredPath + (query ? '?' + query : '') + (hash ? '#' + hash : ''));
+        }
+      })();
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

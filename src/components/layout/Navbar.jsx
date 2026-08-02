@@ -25,12 +25,12 @@ export default function Navbar({ onSearch }) {
               Explore
             </NavLink>
 
-            <a
-              href="#categories"
+            <Link
+              to="/#categories"
               className="text-sm font-medium text-zinc-300 transition-colors duration-200 hover:text-white"
             >
               Categories
-            </a>
+            </Link>
 
             <NavLink
               to="/wallpapers"

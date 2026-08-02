@@ -3,10 +3,10 @@ import { categories } from '../../data/categories'
 import { createCategorySlug } from '../../utils/categorySlug'
 
 const quickLinks = [
-  { label: 'Home', href: '/' },
-  { label: 'Trending', href: '#trending' },
-  { label: 'Categories', href: '#categories' },
-  { label: 'Recently Added', href: '#recently-added' },
+  { label: 'Home', to: '/' },
+  { label: 'Trending', to: '/#trending' },
+  { label: 'Categories', to: '/#categories' },
+  { label: 'Recently Added', to: '/#recently-added' },
 ]
 
 const socials = ['GitHub', 'X', 'Discord']
@@ -17,9 +17,9 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <a href="/" className="text-lg font-semibold tracking-tight text-white transition hover:text-zinc-300">
+            <Link to="/" className="text-lg font-semibold tracking-tight text-white transition hover:text-zinc-300">
               Wallpaper Vault
-            </a>
+            </Link>
             <p className="mt-4 max-w-xs text-sm leading-6 text-zinc-400">
               Discover high-quality wallpapers for every device.
             </p>
@@ -30,9 +30,9 @@ export default function Footer() {
             <ul className="mt-4 space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.label}>
-                  <a href={link.href} className="text-sm text-zinc-400 transition hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+                  <Link to={link.to} className="text-sm text-zinc-400 transition hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

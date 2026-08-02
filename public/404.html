@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redirecting…</title>
+    <script>
+      (function () {
+        var basePath = '/wallpaper-vault/';
+        var routeKey = '__wallpaper_vault_route';
+        var queryKey = '__wallpaper_vault_query';
+        var hashKey = '__wallpaper_vault_hash';
+        var currentPath = window.location.pathname;
+        var route = currentPath.indexOf(basePath) === 0 ? currentPath.slice(basePath.length - 1) : '/';
+        var destination = basePath + '?' + routeKey + '=' + encodeURIComponent(route);
+
+        if (window.location.search) destination += '&' + queryKey + '=' + encodeURIComponent(window.location.search.slice(1));
+        if (window.location.hash) destination += '&' + hashKey + '=' + encodeURIComponent(window.location.hash.slice(1));
+
+        window.location.replace(destination);
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>
