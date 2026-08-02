@@ -7,7 +7,7 @@ export default function Layout({ children }) {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white">
+    <div className="min-h-screen bg-[var(--page-bg)] text-[var(--text-primary)]">
       <Navbar onSearch={() => setIsSearchOpen(true)} />
 
       <SearchModal

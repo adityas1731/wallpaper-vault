@@ -84,18 +84,18 @@ export default function SearchModal({ isOpen, onClose }) {
   return (
     <div
       role="presentation"
-      className="fixed inset-0 z-[60] flex items-start justify-center overflow-y-auto bg-zinc-950/70 px-4 py-20 backdrop-blur-sm sm:items-center sm:py-8"
+      className="fixed inset-0 z-[60] flex items-start justify-center overflow-y-auto bg-black/45 px-4 py-20 backdrop-blur-sm sm:items-center sm:py-8"
       onMouseDown={closeModal}
     >
       <section
         role="dialog"
         aria-modal="true"
         aria-labelledby="search-title"
-        className="w-full max-w-xl overflow-hidden rounded-2xl border border-white/10 bg-zinc-900/95 shadow-2xl shadow-black/50"
+        className="w-full max-w-xl overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface-raised)] shadow-2xl shadow-[var(--shadow)]"
         onMouseDown={(event) => event.stopPropagation()}
       >
-        <div className="flex items-center gap-3 border-b border-white/10 p-4 sm:p-5">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="size-5 shrink-0 text-zinc-400" aria-hidden="true">
+        <div className="flex items-center gap-3 border-b border-[var(--border)] p-4 sm:p-5">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="size-5 shrink-0 text-[var(--text-secondary)]" aria-hidden="true">
             <circle cx="11" cy="11" r="6" />
             <path d="m16 16 4 4" />
           </svg>
@@ -110,7 +110,7 @@ export default function SearchModal({ isOpen, onClose }) {
               setSelectedIndex(-1)
             }}
             placeholder="Search wallpapers..."
-            className="min-w-0 flex-1 bg-transparent text-base text-white outline-none placeholder:text-zinc-500"
+            className="min-w-0 flex-1 bg-transparent text-base text-[var(--text-primary)] outline-none placeholder:text-[var(--text-secondary)]"
           />
 
         </div>
@@ -125,16 +125,16 @@ export default function SearchModal({ isOpen, onClose }) {
                     type="button"
                     onClick={() => openWallpaper(wallpaper)}
                     onMouseEnter={() => setSelectedIndex(index)}
-                    className={`flex w-full items-center gap-4 rounded-xl border p-2 text-left transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${selectedIndex === index ? 'border-white/10 bg-white/10' : 'border-transparent hover:bg-white/5'}`}
+                    className={`flex w-full items-center gap-4 rounded-xl border p-2 text-left transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] ${selectedIndex === index ? 'border-[var(--border)] bg-[var(--button-secondary)]' : 'border-transparent hover:bg-[var(--button-secondary)]'}`}
                   >
                     <img src={wallpaper.thumbnail} alt="" className="size-14 rounded-lg object-cover" />
-                    <div><p className="font-medium text-white">{wallpaper.title}</p><p className="mt-1 text-sm text-zinc-400">{wallpaper.category}</p></div>
+                    <div><p className="font-medium text-[var(--text-primary)]">{wallpaper.title}</p><p className="mt-1 text-sm text-[var(--text-secondary)]">{wallpaper.category}</p></div>
                   </button>
                 </li>
               ))}
             </ul>
           ) : (
-            <p className="text-sm font-medium text-zinc-300">No wallpapers found.</p>
+            <p className="text-sm font-medium text-[var(--text-secondary)]">No wallpapers found.</p>
           )}
         </div>
       </section>

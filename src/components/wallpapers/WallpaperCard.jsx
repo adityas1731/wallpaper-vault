@@ -1,23 +1,21 @@
 import OptimizedImage from '../common/OptimizedImage'
 
-export default function WallpaperCard({ wallpaper }) {
+export default function WallpaperCard({ wallpaper, metadata }) {
+  const metaText = Array.isArray(metadata)
+    ? metadata.filter(Boolean).join(' · ')
+    : metadata || wallpaper.category
+
   return (
-    <article className="group relative aspect-[2/3] overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] transition duration-300 ease-out hover:-translate-y-1 hover:border-white/30">
-      <OptimizedImage
-        src={wallpaper.image}
-        alt={`${wallpaper.title} ${wallpaper.category.toLowerCase()} wallpaper`}
-        className="size-full object-cover transition duration-500 ease-out group-hover:scale-105"
-      />
-      <div className="absolute inset-x-0 top-0 flex items-start justify-between p-4">
-        <span className="rounded-full border border-white/15 bg-zinc-950/60 px-2.5 py-1 text-xs font-medium text-white backdrop-blur-sm">
-          {wallpaper.resolution}
-        </span>
-        <span className="rounded-full border border-white/15 bg-zinc-950/60 px-2.5 py-1 text-xs font-medium text-white backdrop-blur-sm">
-          {wallpaper.category}
-        </span>
+    <article className="group overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-sm shadow-[var(--shadow)] transition duration-300 ease-out hover:-translate-y-1 hover:border-[var(--accent)]/40">
+      <div className="aspect-[2/3] overflow-hidden">
+        <OptimizedImage src={wallpaper.image} alt={`${wallpaper.title} ${wallpaper.category.toLowerCase()} wallpaper`} className="size-full object-cover transition duration-500 ease-out group-hover:scale-[1.03]" />
       </div>
-      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-zinc-950 via-zinc-950/75 to-transparent px-5 pb-5 pt-16">
-        <h2 className="text-lg font-semibold text-white">{wallpaper.title}</h2>
+      <div className="flex min-h-24 items-start justify-between gap-4 p-4">
+        <div className="min-w-0">
+          <h2 className="truncate font-medium text-[var(--text-primary)]">{wallpaper.title}</h2>
+          <p className="mt-1 truncate text-sm text-[var(--text-secondary)]">{metaText}</p>
+        </div>
+        <span className="shrink-0 rounded-full border border-[var(--border)] bg-[var(--button-secondary)] px-2.5 py-1 text-xs font-medium text-[var(--text-secondary)]">{wallpaper.resolution}</span>
       </div>
     </article>
   )

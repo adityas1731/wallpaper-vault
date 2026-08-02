@@ -1,43 +1,61 @@
 @import "tailwindcss";
 
-/* ---------------------------------------- */
-/* Search Modal Scrollbar                   */
-/* ---------------------------------------- */
-
-.search-scrollbar {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+:root {
+  --page-bg: #07080b;
+  --surface: #0d0f14;
+  --surface-raised: #12151c;
+  --text-primary: #f4f1ea;
+  --text-secondary: #a1a1aa;
+  --border: rgba(255, 255, 255, 0.09);
+  --accent: #8b5cf6;
+  --accent-secondary: #d782b6;
+  --accent-text: #ffffff;
+  --button-secondary: rgba(255, 255, 255, 0.035);
+  --shadow: rgba(0, 0, 0, 0.32);
+  color-scheme: dark;
 }
 
-.search-scrollbar::-webkit-scrollbar {
-  width: 8px;
+:root[data-theme='light'] {
+  --page-bg: #f8f6f1;
+  --surface: #fffdfa;
+  --surface-raised: #ffffff;
+  --text-primary: #202329;
+  --text-secondary: #68645e;
+  --border: rgba(52, 46, 40, 0.12);
+  --accent: #a96f38;
+  --accent-secondary: #d9a66d;
+  --accent-text: #ffffff;
+  --button-secondary: rgba(82, 66, 50, 0.035);
+  --shadow: rgba(68, 53, 38, 0.1);
+  color-scheme: light;
 }
 
-.search-scrollbar::-webkit-scrollbar-track {
-  background: transparent;
+html, body, #root { min-height: 100%; }
+
+body {
+  margin: 0;
+  background: var(--page-bg);
+  color: var(--text-primary);
+  transition: background-color 180ms ease, color 180ms ease;
 }
 
-.search-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.16);
-  border-radius: 9999px;
-  border: 2px solid transparent;
-  background-clip: content-box;
-  transition: background-color 0.2s ease;
-}
+/* Keep legacy route components readable while shared surfaces migrate to tokens. */
+:root[data-theme='light'] .bg-zinc-950 { background-color: var(--page-bg); }
+:root[data-theme='light'] .bg-zinc-900 { background-color: var(--surface); }
+:root[data-theme='light'] .text-white { color: var(--text-primary); }
+:root[data-theme='light'] .text-zinc-400, :root[data-theme='light'] .text-zinc-300, :root[data-theme='light'] .text-zinc-500 { color: var(--text-secondary); }
+:root[data-theme='light'] .border-white\/10, :root[data-theme='light'] .border-white\/15 { border-color: var(--border); }
+:root[data-theme='light'] .bg-white\/5, :root[data-theme='light'] .bg-white\/10, :root[data-theme='light'] .bg-white\/\[0\.035\] { background-color: var(--button-secondary); }
+:root[data-theme='light'] .from-zinc-950 { --tw-gradient-from: rgba(32, 35, 41, 0.94) var(--tw-gradient-from-position); }
+:root[data-theme='light'] .via-zinc-950\/75 { --tw-gradient-via: rgba(32, 35, 41, 0.72) var(--tw-gradient-via-position); }
 
-.search-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
-  background-clip: content-box;
-}
+.search-scrollbar { scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+.search-scrollbar::-webkit-scrollbar { width: 8px; }
+.search-scrollbar::-webkit-scrollbar-track, .search-scrollbar::-webkit-scrollbar-corner { background: transparent; }
+.search-scrollbar::-webkit-scrollbar-thumb { background: var(--border); border: 2px solid transparent; border-radius: 9999px; background-clip: content-box; }
+.search-scrollbar::-webkit-scrollbar-thumb:hover { background: var(--text-secondary); background-clip: content-box; }
 
-.search-scrollbar::-webkit-scrollbar-corner {
-  background: transparent;
-.search-scrollbar::-webkit-scrollbar-thumb {
-  background: transparent;
-}
-
-.search-scrollbar:hover::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,.22);
-  background-clip: content-box;
-}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  body { transition: none; }
 }

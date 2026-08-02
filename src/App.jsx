@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import PageLoader from './components/common/PageLoader'
 import Layout from './components/layout/Layout'
 import { WallpapersProvider } from './context/WallpapersContext'
+import { ThemeProvider } from './context/ThemeContext'
 import Home from './pages/Home'
 
 const Wallpapers = lazy(() => import('./pages/Wallpapers'))
@@ -14,8 +15,9 @@ const NotFound = lazy(() => import('./pages/NotFound'))
 
 export default function App() {
   return (
-    <WallpapersProvider>
-      <Layout>
+    <ThemeProvider>
+      <WallpapersProvider>
+        <Layout>
         <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -27,7 +29,8 @@ export default function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
-      </Layout>
-    </WallpapersProvider>
+        </Layout>
+      </WallpapersProvider>
+    </ThemeProvider>
   )
 }
