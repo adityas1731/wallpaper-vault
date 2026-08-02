@@ -1,10 +1,6 @@
-import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import SearchModal from '../common/SearchModal'
 
 export default function Navbar({ onSearch }) {
-  const handleCloseSearch = () => setIsSearchOpen(false)
-
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-zinc-950/60 backdrop-blur">
       <nav
