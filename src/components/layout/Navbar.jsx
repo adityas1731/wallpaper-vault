@@ -38,6 +38,13 @@ export default function Navbar({ onSearch }) {
             >
               Collections
             </NavLink>
+
+            <NavLink
+              to="/favorites"
+              className={({ isActive }) => `text-sm font-medium transition-colors duration-200 hover:text-white ${isActive ? 'text-white' : 'text-zinc-300'}`}
+            >
+              Favorites
+            </NavLink>
           </div>
 
           {/* Action Buttons */}
