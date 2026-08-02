@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import WallpaperCard from '../components/wallpapers/WallpaperCard'
+import Seo from '../components/common/Seo'
 import { wallpapers } from '../data/wallpapers'
 import { useFavorites } from '../hooks/useFavorites'
 
@@ -9,6 +10,7 @@ export default function Favorites() {
 
   return (
     <section className="px-6 pb-24 pt-32 sm:px-8 sm:pb-32 sm:pt-40">
+      <Seo title="Favorite Wallpapers" description="View your saved wallpapers on Wallpaper Vault." canonicalPath="/favorites" noIndex />
       <div className="mx-auto max-w-7xl">
         <header className="max-w-2xl">
           <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">Favorite Wallpapers</h1>

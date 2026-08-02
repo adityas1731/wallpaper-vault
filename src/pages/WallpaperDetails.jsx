@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import WallpaperCard from '../components/wallpapers/WallpaperCard'
+import Seo from '../components/common/Seo'
 import { wallpapers } from '../data/wallpapers'
 import { useFavorites } from '../hooks/useFavorites'
 import { downloadWallpaper } from '../utils/downloadWallpaper'
@@ -68,6 +69,7 @@ export default function WallpaperDetails() {
 
   return (
     <>
+      <Seo title={wallpaper.title} description={`Download ${wallpaper.title}, a ${wallpaper.category} wallpaper from Wallpaper Vault.`} image={wallpaper.image} canonicalPath={`/wallpapers/${wallpaper.id}`} type="article" />
       <section className="px-6 pb-24 pt-32 sm:px-8 sm:pb-32 sm:pt-40">
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[minmax(0,3fr)_minmax(20rem,2fr)] lg:items-start lg:gap-12 xl:gap-16">
           <div className="flex w-full justify-center">

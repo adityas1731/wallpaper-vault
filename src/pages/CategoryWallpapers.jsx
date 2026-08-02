@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
 import WallpaperCard from '../components/wallpapers/WallpaperCard'
+import Seo from '../components/common/Seo'
 import { wallpapers } from '../data/wallpapers'
 import { categoryMatchesSlug } from '../utils/categorySlug'
 
@@ -11,6 +12,7 @@ export default function CategoryWallpapers() {
   if (!categoryName) {
     return (
       <section className="px-6 pb-24 pt-32 sm:px-8 sm:pb-32 sm:pt-40">
+        <Seo title="Category Not Found" noIndex />
         <div className="mx-auto max-w-7xl text-center">
           <h1 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">Category not found</h1>
           <p className="mt-3 text-zinc-400">We couldn&apos;t find any wallpapers in this category.</p>
@@ -24,6 +26,7 @@ export default function CategoryWallpapers() {
 
   return (
     <section className="px-6 pb-24 pt-32 sm:px-8 sm:pb-32 sm:pt-40">
+      <Seo title={`${categoryName} Wallpapers`} description={`Explore curated ${categoryName} wallpapers on Wallpaper Vault.`} canonicalPath={`/categories/${categorySlug}`} />
       <div className="mx-auto max-w-7xl">
         <header className="max-w-2xl">
           <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">{categoryName} Wallpapers</h1>
